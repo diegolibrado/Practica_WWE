@@ -5,7 +5,7 @@ import java.util.*;
 public class Luchador {
 	
 	//ATRIBUTOS DE LA CLASE LUCHADOR
-	private static String nombre;
+	private String nombre;
 	private String categoria;
 	private int fuerza;
 	private int salud;
@@ -48,7 +48,7 @@ public class Luchador {
 		
 	}
 	
-	public static void info() {
+	public void info() {
 		System.out.println("*" + nombre + "*");
 	}
 
