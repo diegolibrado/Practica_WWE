@@ -3,56 +3,65 @@ package pojos;
 import java.util.*;
 
 public class Luchador {
-	
-	//ATRIBUTOS DE LA CLASE LUCHADOR
+
+	// ATRIBUTOS DE LA CLASE LUCHADOR
 	private String nombre;
-	private String categoria;
+	private int categoria;
 	private int fuerza;
 	private int salud;
-	private int ataquesDisponibles;
-	private int ko;
-	private ArrayList<Ataque> ataques = new ArrayList<>();
-	
+	private boolean ko;
+	private ArrayList<Ataque> ataques;
+
 	/**
 	 * Constructor de la clase Luchador
 	 * @param nombre
 	 * @param categoria
-	 * @param fuerza
-	 * @param salud
-	 * @param ataquesDisponibles
-	 * @param ko
 	 */
-	public Luchador (String nombre, String categoria, int fuerza, int salud, int ataquesDisponibles, int ko) {
+	public Luchador(String nombre, int categoria) {
 		this.nombre = nombre;
 		this.categoria = categoria;
-		this.fuerza = fuerza;
-		this.salud = salud;
-		this.ataquesDisponibles = ataquesDisponibles;
-		this.ko = ko;
-	}
-	
-	//METODOS DE LA CLASE LUCHADOR
-	
-	
-	public static void rellenarAtaques() {
-		
-	}
-	
-	
-	public static void recibeGolpe(int daño) {
-		
-	}
-	
-	
-	public static void recuperarse() {
-		
-	}
-	
-	public void info() {
-		System.out.println("*" + nombre + "*");
+		this.fuerza = categoria * 10 + 10;
+		this.salud = 300;
+		this.ko = false;
+		this.ataques = new ArrayList<>();
 	}
 
-	//GETTERS Y SETTERS
+	// METODOS DE LA CLASE LUCHADOR
+	/**
+	 * Método para generar los ataques y rellenar el ArrayList de ataques
+	 * @param ataques
+	 */
+	public void generarAtaques() {
+		Random aleatorio = new Random();
+		
+		for(int i = 0; i < categoria; i++) {
+			// Generamos un numero aleatorio (0, 1 o 2) ya que solo tenemos 3 tipos de ataque.
+			int num_ataque = aleatorio.nextInt(3);
+			switch(num_ataque) {
+			case 0: ataques.add(new Punch (fuerza));
+			break;
+			}
+//			if(num_ataque == 0) {
+//				ataques.add(new Punch(Punch.getPotencia()));
+//			}
+		}
+	}
+
+	public void recibeGolpe(int daño) {
+
+	}
+
+	public void enfermeria() {
+
+	}
+
+	public void info() {
+		System.out.println("* " + nombre + " *");
+		System.out.println("Categoría: " + categoria);
+		System.out.println("Ataques disponibles: " + ataques);
+	}
+
+	// GETTERS Y SETTERS
 	public String getNombre() {
 		return nombre;
 	}
@@ -61,11 +70,11 @@ public class Luchador {
 		this.nombre = nombre;
 	}
 
-	public String getCategoria() {
+	public int getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
 
@@ -85,36 +94,12 @@ public class Luchador {
 		this.salud = salud;
 	}
 
-	public int getAtaquesDisponibles() {
-		return ataquesDisponibles;
-	}
-
-	public void setAtaquesDisponibles(int ataquesDisponibles) {
-		this.ataquesDisponibles = ataquesDisponibles;
-	}
-
-	public int getKo() {
+	public boolean getKo() {
 		return ko;
 	}
 
 	public void setKo(int ko) {
-		this.ko = ko;
+		this.ko = false;
 	}
-
-	public ArrayList<Ataque> getAtaques() {
-		return ataques;
-	}
-
-	public void setAtaques(ArrayList<Ataque> ataques) {
-		this.ataques = ataques;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
