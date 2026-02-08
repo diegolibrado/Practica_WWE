@@ -1,3 +1,6 @@
+/**
+ * @author Diego Librado Lopez
+ */
 package pojos;
 
 import java.util.*;
@@ -14,6 +17,7 @@ public class Luchador {
 
 	/**
 	 * Constructor de la clase Luchador
+	 * 
 	 * @param nombre
 	 * @param categoria
 	 */
@@ -29,32 +33,49 @@ public class Luchador {
 	// METODOS DE LA CLASE LUCHADOR
 	/**
 	 * Método para generar los ataques y rellenar el ArrayList de ataques
+	 * 
 	 * @param ataques
 	 */
 	public void generarAtaques() {
 		Random aleatorio = new Random();
-		
-		for(int i = 0; i < categoria; i++) {
-			// Generamos un numero aleatorio (0, 1 o 2) ya que solo tenemos 3 tipos de ataque.
+
+		for (int i = 0; i < categoria; i++) {
+			// Generamos un numero aleatorio (0, 1 o 2) ya que solo tenemos 3 tipos de
+			// ataque.
 			int num_ataque = aleatorio.nextInt(3);
-			switch(num_ataque) {
-			case 0: ataques.add(new Punch (fuerza));
-			break;
+			switch (num_ataque) {
+			case 0:
+				ataques.add(new Patada());
+				break;
+			case 1:
+				ataques.add(new Punch());
+				break;
+			case 2:
+				ataques.add(new Salto());
+				break;
 			}
-//			if(num_ataque == 0) {
-//				ataques.add(new Punch(Punch.getPotencia()));
-//			}
 		}
 	}
 
+	/**
+	 * Método para recibir el daño y restar salud
+	 * 
+	 * @param daño daño causado la luchador
+	 */
 	public void recibeGolpe(int daño) {
 
 	}
 
+	/**
+	 * Método para recuperar salud tras un combate
+	 */
 	public void enfermeria() {
 
 	}
 
+	/**
+	 * Método para mostrar la informacion del luchador
+	 */
 	public void info() {
 		System.out.println("* " + nombre + " *");
 		System.out.println("Categoría: " + categoria);

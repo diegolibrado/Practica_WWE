@@ -1,3 +1,6 @@
+/**
+ * @author Diego Librado Lopez
+ */
 package main;
 
 import java.util.*;
@@ -17,26 +20,46 @@ public class Torneo {
 		int opcion = -1;
 
 		System.out.println("*** BIENVENIDO AL TORNEO DE LUCHA LIBRA DAWWE ***");
-		// menuPrincipal();
 
 		do {
+			// Muestra el menu principal
 			menuPrincipal();
-			opcion = Integer.parseInt(teclado.nextLine());
-			// Imprimimos menu
+			// inicializamos una variable como falso para no salir hasta que el valor de la opción sea válido
+			boolean valido = false;
+			while (!valido){
+				try {
+					opcion = Integer.parseInt(teclado.nextLine());
+					// cambiamos el valor para salir del bucle
+					valido = true;
+				} catch (NumberFormatException e) {
+					System.out.print("Opcion no valida, introduzca un numero: ");
+				}
+			}
 
 			switch (opcion) {
-			case 1: mostrarLista(luchadores);
+			case 1:
+				// Mostrar lista de luchadores
+				mostrarLista(luchadores);
 				break;
-			case 2:	anadirLuchador(luchadores);
+			case 2:
+				// Añadir un luchador nuevo
+				anadirLuchador(luchadores);
 				break;
 			case 3:
+				// Realizar combate
+				System.out.println("\n...aqui se realizaria el combate...");
 				break;
 			case 4:
+				// Mostrar Hall of Fame
+				hallOfFame(hallOfFame);
 				break;
 			case 5:
+				// Salir
+				System.out.println("\nTORNEO FINALIZADO");
 				break;
 			default:
-				System.out.println("Opcion inválida");
+				System.out.println("El numero debe estar entre 1 y 5");
+				break;
 			}
 		} while (opcion != 5);
 	}
@@ -52,10 +75,16 @@ public class Torneo {
 		System.out.println("3 - Ready? FIGHT!");
 		System.out.println("4 - Mostrar Hall of Fame");
 		System.out.println("5 - Salir");
+		System.out.print("Opcion → ");
 	}
 
+	/**
+	 * Metodo para añadir nuevos luchadores a la lista
+	 * 
+	 * @param luchadores LinkedList en la que se almacenan los luchadores creados
+	 */
 	public static void anadirLuchador(LinkedList<Luchador> luchadores) {
-		System.out.println("** LUCHADOR NUEVO **");
+		System.out.println("\n** LUCHADOR NUEVO **");
 
 		System.out.print("Nombre: ");
 		String nombre = teclado.nextLine();
@@ -72,7 +101,12 @@ public class Torneo {
 		Luchador luchador = new Luchador(nombre, categoria);
 		luchadores.add(luchador);
 	}
-	
+
+	/**
+	 * Método para mostrar la lista de los luchadores
+	 * 
+	 * @param luchadores LinkedList en la que se almacenan los luchadores creados
+	 */
 	public static void mostrarLista(LinkedList<Luchador> luchadores) {
 		System.out.println("\n** LISTA DE LUCHADORES **");
 
@@ -85,6 +119,16 @@ public class Torneo {
 			}
 		}
 		System.out.println();
+	}
+
+	/**
+	 * Método para imprimir los luchadores y sus combates ganados
+	 * 
+	 * @param hallOfFame HashMap en la que se almacena el nombre y los combates
+	 *                   ganados de cada luchador
+	 */
+	public static void hallOfFame(HashMap<String, Integer> hallOfFame) {
+
 	}
 
 }

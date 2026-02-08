@@ -1,33 +1,40 @@
+/**
+ * @author Diego Librado Lopez
+ */
 package pojos;
+
 /*
  * CLASE ATAQUE (PADRE)
  */
 import java.util.*;
 
 public abstract class Ataque {
-	//ATRIBUTOS DE LA CLASE ATAQUE
+	// ATRIBUTOS DE LA CLASE ATAQUE
 	private int potencia;
-	Luchador luchador1 = new Luchador();
-	
-	//MÉTODOS DE LA CLASE ATAQUE
-	
+
+	// MÉTODOS DE LA CLASE ATAQUE
+
 	/**
 	 * Método abstracto para que el Luchador lance el ataque
-	 * @param luchador
+	 * 
+	 * @param luchador objeto de tipo Luchador
 	 */
 	public abstract void lanzarAtaque(Luchador luchador);
-	
-	public static void ataqueBloqueado(int fuerzaAtaque, Luchador luchador1) {
+
+	public static void ataqueBloqueado(int fuerzaAtaque, Luchador luchador) {
 		Random aleatorio = new Random();
-		
-		int daño = aleatorio.nextInt(Luchador.getSalud());
-		
-		if(daño > Luchador.getFuerza()) {
-			
+
+		// Genera un numero aleatorio entre 0 y la salud del luchador
+		int daño = aleatorio.nextInt(luchador.getSalud());
+
+		if (daño > luchador.getFuerza()) {
+
 		}
 	}
 
+	// GETTER
 	public int getPotencia() {
 		return potencia;
 	}
+
 }
