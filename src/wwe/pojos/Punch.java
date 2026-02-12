@@ -1,7 +1,7 @@
 /**
  * @author Diego Librado Lopez
  */
-package pojos;
+package wwe.pojos;
 
 /*
  * CLASE PUÑETAZO (HIJA)

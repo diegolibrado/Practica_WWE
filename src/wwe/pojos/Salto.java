@@ -1,22 +1,22 @@
 /**
  * @author Diego Librado Lopez
  */
-package pojos;
+package wwe.pojos;
 
 /*
- * CLASE PATADA (HIJA)
+ * CLASE SALTO (HIJA)
  */
-public class Patada extends Ataque {
+public class Salto extends Ataque {
 
 	/**
 	 * Método heredado dela clase Padre
 	 */
 	public void lanzarAtaque(Luchador luchador) {
-		System.out.println("Puñetazo a " + luchador.getNombre());
+		System.out.println("Salto a " + luchador.getNombre());
 	}
 
 	// METODO TOSTRING
 	public String toString() {
-		return "Patada";
+		return "Salto";
 	}
 }

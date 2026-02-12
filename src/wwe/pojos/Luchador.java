@@ -1,7 +1,7 @@
 /**
  * @author Diego Librado Lopez
  */
-package pojos;
+package wwe.pojos;
 
 import java.util.*;
 
@@ -62,15 +62,16 @@ public class Luchador {
 	 * 
 	 * @param daño daño causado la luchador
 	 */
-	public void recibeGolpe(int daño) {
-
+	public void recibeGolpe(int dano) {
+		salud -= dano;
 	}
 
 	/**
 	 * Método para recuperar salud tras un combate
 	 */
 	public void enfermeria() {
-
+		salud = 300;
+		ko = false;
 	}
 
 	/**

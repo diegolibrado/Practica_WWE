@@ -1,11 +1,12 @@
 /**
  * @author Diego Librado Lopez
  */
-package main;
+package wwe.main;
 
 import java.util.*;
 
-import pojos.Luchador;
+import wwe.pojos.Combate;
+import wwe.pojos.Luchador;
 
 public class Torneo {
 
@@ -14,7 +15,7 @@ public class Torneo {
 	public static void main(String[] args) {
 		// ATRIBUTOS DE LA CLASE
 		HashMap<String, Integer> hallOfFame = new HashMap<>();
-//		Combate combate = new Combate();
+		Combate combate = new Combate();
 		LinkedList<Luchador> luchadores = new LinkedList<>();
 
 		int opcion = -1;
@@ -24,9 +25,10 @@ public class Torneo {
 		do {
 			// Muestra el menu principal
 			menuPrincipal();
-			// inicializamos una variable como falso para no salir hasta que el valor de la opción sea válido
+			// inicializamos una variable como falso para no salir hasta que el valor de la
+			// opción sea válido
 			boolean valido = false;
-			while (!valido){
+			while (!valido) {
 				try {
 					opcion = Integer.parseInt(teclado.nextLine());
 					// cambiamos el valor para salir del bucle
@@ -47,7 +49,7 @@ public class Torneo {
 				break;
 			case 3:
 				// Realizar combate
-				System.out.println("\n...aqui se realizaria el combate...");
+				realizarCombate();
 				break;
 			case 4:
 				// Mostrar Hall of Fame
@@ -89,15 +91,18 @@ public class Torneo {
 		System.out.print("Nombre: ");
 		String nombre = teclado.nextLine();
 
-		System.out.println("Categoria: ");
-		System.out.println("1: Peso mosca");
-		System.out.println("2: Peso pluma");
-		System.out.println("3: Peso ligero");
-		System.out.println("4: Peso medio");
-		System.out.println("5. Peso pesado");
-
-		int categoria = Integer.parseInt(teclado.nextLine());
-
+		int categoria = -1;
+		do {
+			menuCategorias();
+			try {
+				categoria = Integer.parseInt(teclado.nextLine());
+				if (categoria < 1 || categoria > 5) {
+					System.out.println("La categoria introducida no es valida, introduzca una de las siguientes: ");
+				}
+			} catch (NumberFormatException e) {
+				System.out.print("Opcion no valida, introduzca un numero: ");
+			}
+		} while (categoria < 1 || categoria > 5);
 		Luchador luchador = new Luchador(nombre, categoria);
 		luchadores.add(luchador);
 	}
@@ -128,7 +133,34 @@ public class Torneo {
 	 *                   ganados de cada luchador
 	 */
 	public static void hallOfFame(HashMap<String, Integer> hallOfFame) {
+		System.out.println("\n** HALL OF FAME **");
+
+		if (hallOfFame.size() == 0) {
+			System.out.println("Aun no hay peleadores en el Hall Of Fame");
+		} else {
+			// Usando keySet(), imprimimos el Key (nombre del luchador), y con
+			// hallOfFame.get(nombre), accedemos al valor de dicha key imprimiedo asi el
+			// nombre y sus victorias
+			for (String nombre : hallOfFame.keySet()) {
+				System.out.println(nombre + ": " + hallOfFame.get(nombre) + " victorias");
+			}
+		}
+	}
+
+	public static void realizarCombate() {
+		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Método para imprimir el menu de seleccion de la categoria
+	 */
+	public static void menuCategorias() {
+		System.out.println("Categoria: ");
+		System.out.println("1: Peso mosca");
+		System.out.println("2: Peso pluma");
+		System.out.println("3: Peso ligero");
+		System.out.println("4: Peso medio");
+		System.out.println("5. Peso pesado");
+	}
 }

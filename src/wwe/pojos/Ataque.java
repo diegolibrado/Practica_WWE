@@ -1,7 +1,7 @@
 /**
  * @author Diego Librado Lopez
  */
-package pojos;
+package wwe.pojos;
 
 /*
  * CLASE ATAQUE (PADRE)
@@ -21,14 +21,20 @@ public abstract class Ataque {
 	 */
 	public abstract void lanzarAtaque(Luchador luchador);
 
-	public static void ataqueBloqueado(int fuerzaAtaque, Luchador luchador) {
+	public static boolean ataqueBloqueado(int fuerzaAtaque, Luchador luchador) {
 		Random aleatorio = new Random();
 
+		if(luchador.getSalud() <= 0) {
+			return false;
+		}
 		// Genera un numero aleatorio entre 0 y la salud del luchador
-		int daño = aleatorio.nextInt(luchador.getSalud());
+		int bloqueo = aleatorio.nextInt(luchador.getSalud());
 
-		if (daño > luchador.getFuerza()) {
-
+		if (bloqueo > fuerzaAtaque) {
+			System.out.println("¡¡ATAQUE BLOQUEADO!!");
+			return true;
+		}else {
+			return false;
 		}
 	}
 
@@ -36,5 +42,9 @@ public abstract class Ataque {
 	public int getPotencia() {
 		return potencia;
 	}
+	
+	
+	
+	
 
 }
