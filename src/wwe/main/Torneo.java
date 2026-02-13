@@ -15,8 +15,8 @@ public class Torneo {
 	public static void main(String[] args) {
 		// ATRIBUTOS DE LA CLASE
 		HashMap<String, Integer> hallOfFame = new HashMap<>();
-		Combate combate = new Combate();
 		LinkedList<Luchador> luchadores = new LinkedList<>();
+		Combate combate = new Combate(luchadores);
 
 		int opcion = -1;
 
@@ -27,16 +27,7 @@ public class Torneo {
 			menuPrincipal();
 			// inicializamos una variable como falso para no salir hasta que el valor de la
 			// opción sea válido
-			boolean valido = false;
-			while (!valido) {
-				try {
-					opcion = Integer.parseInt(teclado.nextLine());
-					// cambiamos el valor para salir del bucle
-					valido = true;
-				} catch (NumberFormatException e) {
-					System.out.print("Opcion no valida, introduzca un numero: ");
-				}
-			}
+			opcion = obtenerNumero();
 
 			switch (opcion) {
 			case 1:
@@ -49,7 +40,7 @@ public class Torneo {
 				break;
 			case 3:
 				// Realizar combate
-				realizarCombate();
+				realizarCombate(luchadores);
 				break;
 			case 4:
 				// Mostrar Hall of Fame
@@ -118,8 +109,8 @@ public class Torneo {
 		if (luchadores.size() == 0) {
 			System.out.println("La lista esta vacia.");
 		} else {
-			for (Luchador luchador1 : luchadores) {
-				luchador1.info();
+			for (Luchador luchador : luchadores) {
+				luchador.info();
 				System.out.println();
 			}
 		}
@@ -147,7 +138,7 @@ public class Torneo {
 		}
 	}
 
-	public static void realizarCombate() {
+	public static void realizarCombate(LinkedList<Luchador> luchadores) {
 		// TODO Auto-generated method stub
 
 	}
@@ -161,6 +152,27 @@ public class Torneo {
 		System.out.println("2: Peso pluma");
 		System.out.println("3: Peso ligero");
 		System.out.println("4: Peso medio");
-		System.out.println("5. Peso pesado");
+		System.out.println("5: Peso pesado");
+	}
+
+	/**
+	 * Método para obtener un numero con la restriccion
+	 * @param numero
+	 * @return
+	 */
+	public static int obtenerNumero() {
+		int opcion = -1;
+		boolean valido = false;
+		
+		while(!valido) {
+			try {
+				opcion = Integer.parseInt(teclado.nextLine());
+				// cambiamos el valor para salir del bucle
+				valido = true;
+			} catch (NumberFormatException e) {
+				System.out.print("Opcion no valida, introduzca un numero: ");
+			}
+		}
+		return opcion;
 	}
 }

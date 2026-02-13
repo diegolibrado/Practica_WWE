@@ -10,16 +10,21 @@ import java.util.*;
 
 public abstract class Ataque {
 	// ATRIBUTOS DE LA CLASE ATAQUE
-	private int potencia;
+	Random aleatorio = new Random();
+	protected int potencia;
 
+	public Ataque(int fuerza) {
+		potencia = fuerza;
+	}
 	// MÉTODOS DE LA CLASE ATAQUE
 
 	/**
 	 * Método abstracto para que el Luchador lance el ataque
 	 * 
 	 * @param luchador objeto de tipo Luchador
+	 * @return 
 	 */
-	public abstract void lanzarAtaque(Luchador luchador);
+	public abstract int lanzarAtaque(Luchador luchador);
 
 	public static boolean ataqueBloqueado(int fuerzaAtaque, Luchador luchador) {
 		Random aleatorio = new Random();

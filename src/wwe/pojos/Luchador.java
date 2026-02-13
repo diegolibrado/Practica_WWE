@@ -45,13 +45,13 @@ public class Luchador {
 			int num_ataque = aleatorio.nextInt(3);
 			switch (num_ataque) {
 			case 0:
-				ataques.add(new Patada());
+				ataques.add(new Patada(fuerza));
 				break;
 			case 1:
-				ataques.add(new Punch());
+				ataques.add(new Punch(fuerza));
 				break;
 			case 2:
-				ataques.add(new Salto());
+				ataques.add(new Salto(fuerza));
 				break;
 			}
 		}
@@ -64,6 +64,9 @@ public class Luchador {
 	 */
 	public void recibeGolpe(int dano) {
 		salud -= dano;
+		if(salud <= 0) {
+			ko = true;
+		}
 	}
 
 	/**
