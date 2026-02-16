@@ -18,11 +18,11 @@ public class Patada extends Ataque {
 	/**
 	 * Método heredado dela clase Padre
 	 */
-	public int lanzarAtaque(Luchador oponente) {
-		System.out.println("Patada a " + oponente.getNombre());
+	public int lanzarAtaque(Luchador rival) {
+		System.out.println("Patada a " + rival.getNombre());
 		int fuerza_ataque = aleatorio.nextInt(potencia); 
 		
-		if(ataqueBloqueado(fuerza_ataque, oponente)) {
+		if(ataqueBloqueado(fuerza_ataque, rival)) {
 			fuerza_ataque = fuerza_ataque/2;
 		}
 		return fuerza_ataque;

@@ -127,4 +127,12 @@ public class Luchador {
 		this.ko = false;
 	}
 
+	public ArrayList<Ataque> getAtaques() {
+		return ataques;
+	}
+
+	public void setAtaques(ArrayList<Ataque> ataques) {
+		this.ataques = ataques;
+	}
+
 }

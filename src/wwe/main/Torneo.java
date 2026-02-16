@@ -5,6 +5,7 @@ package wwe.main;
 
 import java.util.*;
 
+import wwe.exception.ContrincantesInsuficientesException;
 import wwe.pojos.Combate;
 import wwe.pojos.Luchador;
 
@@ -40,7 +41,7 @@ public class Torneo {
 				break;
 			case 3:
 				// Realizar combate
-				realizarCombate(luchadores);
+				realizarCombate(luchadores, hallOfFame);
 				break;
 			case 4:
 				// Mostrar Hall of Fame
@@ -91,11 +92,13 @@ public class Torneo {
 					System.out.println("La categoria introducida no es valida, introduzca una de las siguientes: ");
 				}
 			} catch (NumberFormatException e) {
-				System.out.print("Opcion no valida, introduzca un numero: ");
+				System.out.print("Opcion no valida, introduzca un numero: \n");
 			}
 		} while (categoria < 1 || categoria > 5);
 		Luchador luchador = new Luchador(nombre, categoria);
 		luchadores.add(luchador);
+		//Generamos los ataques del luchador
+		luchador.generarAtaques();
 	}
 
 	/**
@@ -138,9 +141,40 @@ public class Torneo {
 		}
 	}
 
-	public static void realizarCombate(LinkedList<Luchador> luchadores) {
-		// TODO Auto-generated method stub
+	public static void realizarCombate(LinkedList<Luchador> luchadores, HashMap<String, Integer> hallOfFame) {
+		// Creamos un objeto de tipo Combate yle pasamos como parametro el LinkedList
+		// con los luchadores
+		Combate nuevoCombate = new Combate(luchadores);
 
+		try {
+			// Realizamos el combate
+			nuevoCombate.fight();
+
+			// Guardamos al ganador
+			Luchador ganador = nuevoCombate.ganador();
+
+			// Incluimos esta victoria al HallOfFame
+
+			String nombreGanador = ganador.getNombre();
+
+			// Si el ganador ya esta, simplemente le añadimos una vistoria, si no esta,
+			// tenemos que crear el "puesto" añadiendo el nombre y solo una victoria, ya se
+			// sumaran las demas mas adelante
+			if (hallOfFame.containsKey(ganador)) {
+				int victorias = hallOfFame.get(nombreGanador);
+				// Mediante un put lo aladimos al HashMap
+				hallOfFame.put(nombreGanador, victorias + 1);
+			} else {
+				hallOfFame.put(nombreGanador, 1);
+			}
+
+			/*
+			 * PREGUNTAR SI LOS LUCHADORES PASAN POR LA ENFERMERIA DENTRO O FUERA DEL METODO
+			 */
+
+		} catch (ContrincantesInsuficientesException e) {
+			System.out.println("ERROR: " + e.getMessage());
+		}
 	}
 
 	/**
@@ -157,14 +191,15 @@ public class Torneo {
 
 	/**
 	 * Método para obtener un numero con la restriccion
+	 * 
 	 * @param numero
 	 * @return
 	 */
 	public static int obtenerNumero() {
 		int opcion = -1;
 		boolean valido = false;
-		
-		while(!valido) {
+
+		while (!valido) {
 			try {
 				opcion = Integer.parseInt(teclado.nextLine());
 				// cambiamos el valor para salir del bucle
