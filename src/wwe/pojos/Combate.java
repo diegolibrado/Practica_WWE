@@ -13,7 +13,8 @@ public class Combate {
 	private Luchador ganador;
 
 	public Combate(LinkedList<Luchador> rivales) {
-		this.rivales = rivales;
+		// (rivales) para que se haga una copia de la lista luchadores
+		this.rivales = new LinkedList<>(rivales);
 		// El ganador empieza vacio, hasta que se ejecute el metodo fight()
 		this.ganador = null;
 	}
@@ -57,13 +58,14 @@ public class Combate {
 			// Elegimos el ataque del atacante, numero aleatorio entre cero y el tamaño del
 			// ArrayList de ataques de cada luchador, hay que usar un Get
 			int numAtaque = aleatorio.nextInt(atacante.getAtaques().size());
+
 			// aqui elegimos el ataque correspondiente al indice que acabamos de generar con
 			// la linea anterior, hay que usar un getter para acceder a esa posicion del
 			// ArrayList
 			Ataque ataqueAtacante = atacante.getAtaques().get(numAtaque);
 
 			// Calculamos el daño de ataque que vamos a hacer e imprimimos el mensaje
-			// correspondiente al tipo de Ataque se que sea, y el daño se lo hacemos al
+			// correspondiente al tipo de Ataque que sea, y el daño se lo hacemos al
 			// objeto rival, que pasa por parametro. Hay que pasar el rival por parametor
 			// porque en el metodo lanzarAtaque el numero de daño se genera automaticamente
 			// entre el cero y la salud del rival
@@ -74,25 +76,30 @@ public class Combate {
 			// dependiendo del resultado.
 			boolean bloqueaAtaque = ataqueAtacante.ataqueBloqueado(fuerzaAtaque, rival);
 			if (bloqueaAtaque) {
-				// En caso ed que el rival reciba el golpe, el daño que recibe se reduce a la
+				// En caso de que el rival reciba el golpe, el daño que recibe se reduce a la
 				// mitad
+				System.out.println("¡ATAQUE BLOQUEADO!");
 				rival.recibeGolpe(fuerzaAtaque / 2);
 			} else {
+				System.out.println("¡EL ATAQUE NO HA SIDO BLOQUEADO!");
 				rival.recibeGolpe(fuerzaAtaque);
 			}
+			System.out.println("Salud de " + rival.getNombre() + "= " + rival.getSalud());
 
 			// Por ultimo comprobaremos si esta KO o no, es decir, si tiene 0 o menos de
 			// salud
+			System.out.println();
 			if (rival.getSalud() <= 0) {
 				System.out.println(rival.getNombre() + " esta KO.");
 				// Cuando un rival este KO, hay que eliminarlo de la LinkedList con un remove
 				rivales.remove(rival);
 			}
+			System.out.println();
 
 		}
-		//Como solo queda un luchador, el ganador lo asignamos a la posicion numero 0 del ArrayList
+		// Como solo queda un luchador, el ganador lo asignamos a la posicion numero 0
+		// del ArrayList
 		ganador = rivales.get(0);
-
 	}
 
 	public Luchador ganador() {

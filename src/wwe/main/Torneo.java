@@ -17,7 +17,6 @@ public class Torneo {
 		// ATRIBUTOS DE LA CLASE
 		HashMap<String, Integer> hallOfFame = new HashMap<>();
 		LinkedList<Luchador> luchadores = new LinkedList<>();
-		Combate combate = new Combate(luchadores);
 
 		int opcion = -1;
 
@@ -160,12 +159,16 @@ public class Torneo {
 			// Si el ganador ya esta, simplemente le añadimos una vistoria, si no esta,
 			// tenemos que crear el "puesto" añadiendo el nombre y solo una victoria, ya se
 			// sumaran las demas mas adelante
-			if (hallOfFame.containsKey(ganador)) {
+			if (hallOfFame.containsKey(nombreGanador)) {
 				int victorias = hallOfFame.get(nombreGanador);
 				// Mediante un put lo aladimos al HashMap
 				hallOfFame.put(nombreGanador, victorias + 1);
 			} else {
 				hallOfFame.put(nombreGanador, 1);
+			}
+			
+			for(Luchador luchador : luchadores) {
+				luchador.enfermeria();
 			}
 
 			/*

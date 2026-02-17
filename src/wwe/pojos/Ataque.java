@@ -26,7 +26,7 @@ public abstract class Ataque {
 	 */
 	public abstract int lanzarAtaque(Luchador luchador);
 
-	public static boolean ataqueBloqueado(int fuerzaAtaque, Luchador luchador) {
+	public boolean ataqueBloqueado(int fuerzaAtaque, Luchador luchador) {
 		Random aleatorio = new Random();
 
 		if(luchador.getSalud() <= 0) {
@@ -36,7 +36,6 @@ public abstract class Ataque {
 		int bloqueo = aleatorio.nextInt(luchador.getSalud());
 
 		if (bloqueo > fuerzaAtaque) {
-			System.out.println("¡¡ATAQUE BLOQUEADO!!");
 			return true;
 		}else {
 			return false;

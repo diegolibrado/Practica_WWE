@@ -64,7 +64,7 @@ public class Luchador {
 	 */
 	public void recibeGolpe(int dano) {
 		salud -= dano;
-		if(salud <= 0) {
+		if (salud <= 0) {
 			ko = true;
 		}
 	}
@@ -82,7 +82,26 @@ public class Luchador {
 	 */
 	public void info() {
 		System.out.println("* " + nombre + " *");
-		System.out.println("Categoría: " + categoria);
+		System.out.print("Categoría: ");
+		
+		switch (categoria) {
+		case 1:
+			System.out.println("Peso mosca " + "(" + categoria + ")");
+			break;
+		case 2:
+			System.out.println("Peso pluma " + "(" + categoria + ")");
+			break;
+		case 3:
+			System.out.println("Peso ligero " + "(" + categoria + ")");
+			break;
+		case 4:
+			System.out.println("Peso medio " + "(" + categoria + ")");
+			break;
+		case 5:
+			System.out.println("Peso pesado " + "(" + categoria + ")");
+			break;
+		}
+
 		System.out.println("Ataques disponibles: " + ataques);
 	}
 
